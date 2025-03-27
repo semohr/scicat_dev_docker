@@ -1,0 +1,34 @@
+name: scicat_dev
+
+services:
+    mongodb:
+        container_name: scicat_mongodb
+        image: mongo:4.2
+        volumes:
+            - ./local/mongodb:/data/db
+    backend:
+        container_name: scicat_backend
+        build:
+            context: ./SciCat/backend
+            dockerfile: ../../patch/Dockerfile.backend
+            target: dev
+        depends_on:
+            - mongodb
+        volumes:
+            - ./SciCat/backend:/app
+        environment:
+            # Link to the mongo container (see above)
+            MONGODB_URI: mongodb://mongodb:27017/scicat+
+    frontend:
+        container_name: scicat_frontend
+        build:
+            context: ./SciCat/frontend
+            dockerfile: ../../patch/Dockerfile.frontend
+            target: dev
+        ports:
+            - 4200:4200
+        volumes:
+            - ./SciCat/frontend:/app
+        environment:
+            # Link to the backend container (see above)
+            BACKEND_URL: http://backend:3000

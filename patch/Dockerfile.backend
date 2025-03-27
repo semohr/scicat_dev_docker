@@ -1,0 +1,10 @@
+FROM node:20-alpine AS dev
+
+# Prepare app directory
+WORKDIR /app
+COPY package*.json .
+
+# Install all dependencies frozen lock
+RUN npm install --frozen-lockfile
+
+CMD ["npm", "run", "start:dev"]

@@ -1,0 +1,6 @@
+[submodule "SciCat/frontend"]
+	path = SciCat/frontend
+	url = git@github.com:SciCatProject/frontend.git
+[submodule "SciCat/backend"]
+	path = SciCat/backend
+	url = git@github.com:SciCatProject/scicat-backend-next.git

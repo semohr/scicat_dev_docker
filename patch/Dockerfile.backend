@@ -7,4 +7,4 @@ COPY package*.json .
 # Install all dependencies frozen lock
 RUN npm install --frozen-lockfile
 
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start"]

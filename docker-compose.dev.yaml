@@ -16,9 +16,16 @@ services:
             - mongodb
         volumes:
             - ./SciCat/backend:/app
+            # Config is loaded via backend.config.json
+            - ./config/backend/frontend.config.json:/app/src/config/frontend.config.json
         environment:
             # Link to the mongo container (see above)
-            MONGODB_URI: mongodb://mongodb:27017/scicat+
+            MONGODB_URI: mongodb://mongodb:27017/
+            EXPRESS_SESSION_SECRET: a_scicat_secret
+            JWT_SECRET: a_scicat_secret
+            PORT: 3000
+        ports:
+            - 4201:3000
     frontend:
         container_name: scicat_frontend
         build:
@@ -29,6 +36,4 @@ services:
             - 4200:4200
         volumes:
             - ./SciCat/frontend:/app
-        environment:
-            # Link to the backend container (see above)
-            BACKEND_URL: http://backend:3000
+            - ./config/frontend:/config

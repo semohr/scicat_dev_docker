@@ -7,8 +7,5 @@ COPY package*.json .
 # Install all dependencies frozen lock
 RUN npm install --frozen-lockfile
 
-
-EXPOSE 4200
-
 # Run angular in dev mode
-CMD ["npx", "ng", "serve", "--host=0.0.0.0"]
+CMD ["npx", "ng", "serve", "--host=0.0.0.0", "--proxy-config=/config/docker.proxy.config.json"]
